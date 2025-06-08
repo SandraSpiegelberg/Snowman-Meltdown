@@ -6,7 +6,7 @@ Game code for Snowman-Meltdown
 import random
 
 #Snowman ASCII Art stages
-from art_stages import STAGES
+from ascii_art import STAGES
 
 # List of secret words
 WORDS = ["python", "git", "github", "snowman", "meltdown"]
@@ -37,13 +37,15 @@ def play_game():
 
     print("Welcome to Snowman Meltdown!")
 
-    display_game_state(mistakes, secret_word, guessed_letters)
-
     # TODO: Build your game loop here.
-    # For now, simply prompt the user once:
-    guess = input("Guess a letter: ").lower()
-    print("You guessed:", guess)
-    guessed_letters.append(guess)
+    while mistakes <= 3 or len(guessed_letters) >= len(secret_word): #ist noch nicht richtig der zweite Teil
+        display_game_state(mistakes, secret_word, guessed_letters)
+        guess = input("Guess a letter: ").lower()
+        print("You guessed:", guess)
+        guessed_letters.append(guess)
+        if guess not in secret_word:
+            mistakes += 1
+
 
 
 
