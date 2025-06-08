@@ -34,18 +34,27 @@ def play_game():
     secret_word = get_random_word()
     guessed_letters = []
     mistakes = 0
+    list_secret_letters = list(set(secret_word))
+    list_secret_letters.sort()
+    win = False
 
     print("Welcome to Snowman Meltdown!")
-
-    # TODO: Build your game loop here.
-    while mistakes <= 3 or len(guessed_letters) >= len(secret_word): #ist noch nicht richtig der zweite Teil
+    while mistakes < 3 and win == False:
         display_game_state(mistakes, secret_word, guessed_letters)
         guess = input("Guess a letter: ").lower()
-        print("You guessed:", guess)
         guessed_letters.append(guess)
         if guess not in secret_word:
             mistakes += 1
-
+            if mistakes == 3:
+                print("You lose! The secret word was:", secret_word)
+        else:
+            for letter in guessed_letters:
+                if letter not in list_secret_letters:
+                    guessed_letters.remove(letter)
+            guessed_letters.sort()
+            if guessed_letters == list_secret_letters:
+                print('Congratulations, you saved the snowman!')
+                win = True
 
 
 
