@@ -80,8 +80,3 @@ def ask_for_replay():
     elif replay == "y":
         #replay should start here
         play_game()
-
-
-
-if __name__ == "__main__":
-    play_game()
