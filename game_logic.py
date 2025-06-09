@@ -57,7 +57,9 @@ def play_game():
         if guess not in secret_word:
             mistakes += 1
             if mistakes == len(STAGES)-1:
+                print(STAGES[mistakes])
                 print("You lose! The secret word was:", secret_word)
+                ask_for_replay()
         else:
             #delet wrong letters
             for letter in guessed_letters:
@@ -68,13 +70,16 @@ def play_game():
             if guessed_letters == list_secret_letters:
                 print('Congratulations, you saved the snowman!')
                 win = True
+                ask_for_replay()
+
+def ask_for_replay():
     #ask for replay the game
-    replay = input("Do you want to play again? (y/n)")
+    replay = input("Do you want to play again? (y/n) ")
     if replay == "n":
         print("Thank you for playing!")
     elif replay == "y":
         #replay should start here
-        pass
+        play_game()
 
 
 
