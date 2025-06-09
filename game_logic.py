@@ -41,7 +41,7 @@ def play_game():
     win = False
 
     print("Welcome to Snowman Meltdown!")
-    while mistakes < 3 and win == False:
+    while mistakes < len(STAGES)-1 and win == False:
         display_game_state(mistakes, secret_word, guessed_letters)
         guess = input("Guess a letter: ").lower()
         #only single alphabetical character
@@ -56,7 +56,7 @@ def play_game():
         #wrong letter increased mistakes
         if guess not in secret_word:
             mistakes += 1
-            if mistakes == 3:
+            if mistakes == len(STAGES)-1:
                 print("You lose! The secret word was:", secret_word)
         else:
             #delet wrong letters
