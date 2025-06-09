@@ -34,27 +34,47 @@ def play_game():
     secret_word = get_random_word()
     guessed_letters = []
     mistakes = 0
+    #letters from secret word in a list with deleted duplications
     list_secret_letters = list(set(secret_word))
     list_secret_letters.sort()
+    #variable to end the while loop if the secret word is found
     win = False
 
     print("Welcome to Snowman Meltdown!")
     while mistakes < 3 and win == False:
         display_game_state(mistakes, secret_word, guessed_letters)
         guess = input("Guess a letter: ").lower()
+        #only single alphabetical character
+        if not guess.isalpha():
+            print("Please enter a letter.")
+            continue
+        elif len(guess) != 1:
+            print("Please enter only one letter.")
+            continue
+
         guessed_letters.append(guess)
+        #wrong letter increased mistakes
         if guess not in secret_word:
             mistakes += 1
             if mistakes == 3:
                 print("You lose! The secret word was:", secret_word)
         else:
+            #delet wrong letters
             for letter in guessed_letters:
                 if letter not in list_secret_letters:
                     guessed_letters.remove(letter)
+            #Comparison if all secret letters are found
             guessed_letters.sort()
             if guessed_letters == list_secret_letters:
                 print('Congratulations, you saved the snowman!')
                 win = True
+    #ask for replay the game
+    replay = input("Do you want to play again? (y/n)")
+    if replay == "n":
+        print("Thank you for playing!")
+    elif replay == "y":
+        #replay should start here
+        pass
 
 
 
