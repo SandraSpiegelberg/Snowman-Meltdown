@@ -1,7 +1,4 @@
-'''
-Game code for Snowman-Meltdown
-
-'''
+"""Game code for Snowman-Meltdown"""
 
 import random
 
@@ -13,10 +10,18 @@ WORDS = ["python", "git", "github", "snowman", "meltdown"]
 
 
 def get_random_word():
-    """Selects a random word from the list."""
+    """Selects a random word from the list.
+    :param: None
+    :return: random Word from the WORDS list"""
     return WORDS[random.randint(0, len(WORDS) - 1)]
 
 def display_game_state(mistakes, secret_word, guessed_letters):
+    """Displays the game state and print the Word with the correct guessed letters.
+    :param mistakes:  index number of mistakes made
+    :param secret_word: string which is searched for
+    :param guessed_letters: list of guessed letters from the user
+    :return: None
+    """
     #print the Stages of the snowman
     print(STAGES[mistakes])
     display_word = ''
@@ -31,6 +36,14 @@ def display_game_state(mistakes, secret_word, guessed_letters):
 
 
 def play_game():
+    """
+    Game actions: use the display_game_state function to display the game state
+    and ask the user to guess the correct letters.
+    increase the mistakes by 1 if the letter is incorrect.
+    ask for replay at the end of the game.
+    :param: None
+    :return: None
+    """
     secret_word = get_random_word()
     guessed_letters = []
     mistakes = 0
@@ -65,6 +78,9 @@ def play_game():
             for letter in guessed_letters:
                 if letter not in list_secret_letters:
                     guessed_letters.remove(letter)
+                #delet the correct letter if it is twice in list
+                elif guessed_letters.count(letter) > 1:
+                    guessed_letters.remove(letter)
             #Comparison if all secret letters are found
             guessed_letters.sort()
             if guessed_letters == list_secret_letters:
@@ -73,7 +89,10 @@ def play_game():
                 ask_for_replay()
 
 def ask_for_replay():
-    #ask for replay the game
+    """Ask for replay the game
+    :param: None
+    :return: None"""
+
     replay = input("Do you want to play again? (y/n) ")
     if replay == "n":
         print("Thank you for playing!")
